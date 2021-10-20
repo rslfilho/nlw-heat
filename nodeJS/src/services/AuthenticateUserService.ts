@@ -1,6 +1,7 @@
 import axios from 'axios';
 import prismaClient from '../prisma';
 import { sign } from 'jsonwebtoken';
+import { v4 as uuidv4 } from 'uuid';
 
 interface IAccessTokenResponse {
   access_token: string;
@@ -48,6 +49,7 @@ class AuthenticateUserService {
           login,
           avatar_url,
           name,
+          id: uuidv4(),
         }
       });
     };

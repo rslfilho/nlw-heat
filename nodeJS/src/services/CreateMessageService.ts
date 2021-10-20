@@ -1,12 +1,14 @@
 import prismaClient from '../prisma';
 import { io } from '../app';
+import { v4 as uuidv4 } from 'uuid';
 
 class CreateMessageService{
   async execute(text: string, user_id: string) {
     const message = await prismaClient.message.create({
       data: {
         text,
-        user_id
+        user_id,
+        id: uuidv4(),
       },
       include: {
         user: true
