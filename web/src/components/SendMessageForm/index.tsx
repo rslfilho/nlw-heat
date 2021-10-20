@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useState } from 'react';
+import { ChangeEvent, ChangeEventHandler, FormEvent, KeyboardEvent, useContext, useState } from 'react';
 import { VscGithubInverted, VscSignOut } from 'react-icons/vsc';
 import { AuthContext } from '../../context/auth';
 import { api } from '../../services/api';
@@ -17,10 +17,15 @@ export function SendMessageForm() {
     setMessage('');
   };
 
-  const handleEnter = (e: FormEvent) => {
-    if(e.keyCode === 13) {
+  const handleEnter = (e: KeyboardEvent) => {
+    if(e.key === 'Enter') {
       handleSendMessage(e);
     }
+  };
+
+  const handleChange = ({ target }: ChangeEvent) => {
+    const { value } = target as HTMLTextAreaElement;
+    setMessage(value);
   };
 
   return (
@@ -47,7 +52,7 @@ export function SendMessageForm() {
           id="message"
           placeholder="Qual sua expectativa para o evento?"
           value={ message }
-          onChange={ ({ target: { value } }) => setMessage(value)}
+          onChange={ handleChange }
           onKeyUp={ handleEnter }
         />
         <button type="submit">Enviar Mensagem</button>
