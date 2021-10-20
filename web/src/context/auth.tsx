@@ -30,12 +30,10 @@ type AuthResponse = {
   };
 };
 
-const GITHUB_CLIENT_ID = 'dc968c6197f9e14ce0bd';
-
 export function AuthProvider(props: AuthProvider) {
   const [user, setUser] = useState<User | null>(null);
 
-  const signInUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=${GITHUB_CLIENT_ID}`
+  const signInUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}`
 
   const signIn = async (code: string) => {
     const response = await api.post<AuthResponse>('authenticate', {
