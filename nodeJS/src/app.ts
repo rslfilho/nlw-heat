@@ -12,7 +12,7 @@ const serverHttp = http.createServer(app);
 
 const io = new Server(serverHttp, {
   cors: {
-    origin: "*",
+    origin: ["https://nlw-heat-web-he8q0uxij-rslfilho.vercel.app/", "https://nlw-heat-web.vercel.app"],
   },
 });
 
